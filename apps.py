@@ -9,7 +9,8 @@ st.title("AttentionLab")
 st.subheader("Creator Intelligence Dashboard")
 
 # Load Data
-df = pd.read_csv("data/videos.csv")
+df = pd.read_csv("data/Dummy Data.csv")
+
 
 # KPI CALCULATIONS
 
@@ -44,8 +45,10 @@ st.divider()
 hook_views = (
     df.groupby("Hook_Type")["Views"]
     .mean()
-    .reset_index()
+    .idxmax()
 )
+
+st.metric("Most Effective Hook Type", hook_views)
 
 fig1 = px.bar(
     hook_views,
@@ -61,7 +64,7 @@ st.plotly_chart(fig1, use_container_width=True)
 category_views = (
     df.groupby("Category")["Views"]
     .mean()
-    .reset_index()
+    .idxmax()
 )
 
 fig2 = px.bar(
@@ -72,3 +75,9 @@ fig2 = px.bar(
 )
 
 st.plotly_chart(fig2, use_container_width=True)
+
+st.subheader("Key Insights")
+st.write(
+    "1. The most effective hook type is: **{hook_views}**.\n"
+    "2. The most engaging category is: **{category_views}**.")
+
