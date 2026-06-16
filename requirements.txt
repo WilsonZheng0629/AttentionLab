@@ -25,12 +25,12 @@ Day 1:
         - Create requirements.txt
 
 Day 2:
-    - Data Cleaning
+    - Data Cleaning (DONE)
         - Loaded CSV into Pandas
         - Explored dataset
         - Checked missing values
         - Converted dates
-    - Feature Engineering
+    - Feature Engineering (DONE)
         - Created total_engagement
         - Created engagement_rate
         - Created save_rate
@@ -38,18 +38,20 @@ Day 2:
         - Created follower_conversion_rate
         - Created views_per_minute_worked
         - Created engagement_per_minute
-    - Time Analysis
+    - Time Analysis (DONE)
         - Created day_of_week
         - Created month
         - Created is_weekend
-    - Segmentation
+    - Segmentation (DONE)
         - Created length_bucket
-    - Analyst Thinking
+    - Analyst Thinking (DONE)
         - Answered best platform
         - Answered best topic
         - Answered best format
         - Answered best hook type
-    - Output
+    - Output (DONE)
         - Saved cleaned_attentionlab_data.csv
         - Created notebook
         - Pushed to GitHub
+
+Day 3: 
