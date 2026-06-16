@@ -54,4 +54,25 @@ Day 2:
         - Created notebook
         - Pushed to GitHub
 
-Day 3: 
+Day 3:
+    - Database
+        - Create SQLite database
+        - Import cleaned dataset
+        - Verify table exists
+    - SQL
+        - Query top videos
+        - Query top topics
+        - Query top formats
+        - Query top platforms
+        - Query top hook types
+        - Query top posting days
+        - Query top length buckets
+        - Query ROI
+    - Documentation
+        - Create analyst_queries.sql
+        - Create day3_findings.md
+    - GitHub
+        - Commit
+        - Push
+
+Day 4:
