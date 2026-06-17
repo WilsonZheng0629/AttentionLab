@@ -55,11 +55,11 @@ Day 2:
         - Pushed to GitHub
 
 Day 3:
-    - Database
+    - Database (DONE)
         - Create SQLite database
         - Import cleaned dataset
         - Verify table exists
-    - SQL
+    - SQL Queries (DONE)
         - Query top videos
         - Query top topics
         - Query top formats
@@ -68,10 +68,10 @@ Day 3:
         - Query top posting days
         - Query top length buckets
         - Query ROI
-    - Documentation
+    - Documentation (DONE)
         - Create analyst_queries.sql
         - Create day3_findings.md
-    - GitHub
+    - GitHub (DONE)
         - Commit
         - Push
 
