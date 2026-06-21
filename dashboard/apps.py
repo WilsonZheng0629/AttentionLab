@@ -84,7 +84,24 @@ platform_filter = st.sidebar.selectbox(
     ["All"] + list(df["platform"].unique())
 )
 
-# Filter Data Based on Platform Selection
+# Side Bar Filters
+
+platform_filter = st.sidebar.selectbox(
+    "Platform",
+    ["All"] + list(df["platform"].unique())
+)
+
+topic_filter = st.sidebar.selectbox(
+    "Topic",
+    ["All"] + list(df["topic"].unique())
+)
+
+format_filter = st.sidebar.selectbox(
+    "Format",
+    ["All"] + list(df["format"].unique())
+)
+
+# Apply Filters
 
 filtered_df = df.copy()
 
@@ -93,10 +110,113 @@ if platform_filter != "All":
         filtered_df["platform"] == platform_filter
     ]
 
+if topic_filter != "All":
+    filtered_df = filtered_df[
+        filtered_df["topic"] == topic_filter
+    ]
 
-# KEY FINDINGS
+if format_filter != "All":
+    filtered_df = filtered_df[
+        filtered_df["format"] == format_filter
+    ]
 
-st.header("Key Findings")
+# Topic Analysis Section
+st.header("Topic Analysis")
+
+# Average Views by Topic 
+topic_views = (
+    filtered_df
+    .groupby("topic")["views"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.subheader("Average Views by Topic")
+
+st.bar_chart(topic_views)
+
+# and Engagement by Topic
+
+topic_engagement = (
+    filtered_df
+    .groupby("topic")["engagement_rate"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.subheader("Average Engagement by Topic")
+
+st.bar_chart(topic_engagement)
+
+
+# Format Analysis Section
+st.header("Format Analysis")
+
+# Views by Format
+
+format_views = (
+    filtered_df
+    .groupby("format")["views"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.bar_chart(format_views)
+
+# Engagement by Format
+
+format_engagement = (
+    filtered_df
+    .groupby("format")["engagement_rate"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.bar_chart(format_engagement)
+
+# Hook Analysis Section
+st.header("Hook Analysis")
+
+hook_views = (
+    filtered_df
+    .groupby("hook_type")["views"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.bar_chart(hook_views)
+
+# Top Performing Video Types
+st.header("Top Performing Videos")
+
+top_videos = (
+    filtered_df
+    .sort_values(
+        by="views",
+        ascending=False
+    )
+    .head(10)
+)
+
+st.dataframe(
+    top_videos[
+        [
+            "caption",
+            "platform",
+            "topic",
+            "format",
+            "views",
+            "engagement_rate"
+        ]
+    ]
+)
+
+
+
+
+# KEY INSIGHTS
+
+st.header("Key Insights")
 
 st.write("""
 • AI content generated the highest average views.

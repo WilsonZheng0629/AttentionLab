@@ -98,3 +98,27 @@ Day 4:
     - GitHub
         - git add .
         - git commit and push
+
+Day 5:
+    - Dashboard homepage
+    - KPI cards
+    - Topic chart
+    - Platform chart
+    - Format chart
+    - Sidebar filter
+    - Save screenshot in images 
+
+Day 6: 
+    - Filters
+        - Sidebar
+    - Charts
+        - Topic Views
+        - Topic Engagement
+        - Format Views
+        - Format Engagement
+        - Hook Analysis
+    - Table
+        - Top Videos
+    - Save Screenshoot of the Dashboard in Images
+
+
