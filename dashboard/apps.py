@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+
 # Page Title
 st.set_page_config(page_title="AttentionLab", layout="wide")
 
@@ -10,6 +11,7 @@ st.subheader("Creator Intelligence Dashboard")
 
 # Load Data
 df = pd.read_csv("data/cleaned_attentionlab_data.csv")
+filtered_df = df.copy()
 
 
 # KPI CALCULATIONS
@@ -54,7 +56,7 @@ col4.metric(
 
 # VIEWS BY TOPIC 
 topic_views = (
-    df.groupby("topic")["views"]
+    filtered_df.groupby("topic")["views"]
     .mean()
     .sort_values(ascending=False)
 )
@@ -63,7 +65,7 @@ st.bar_chart(topic_views)
 
 # VIEWS BY PLATFORM
 platform_views = (
-    df.groupby("platform")["views"]
+    filtered_df.groupby("platform")["views"]
     .mean()
     .sort_values(ascending=False)
 )
@@ -72,38 +74,34 @@ st.bar_chart(platform_views)
 
 # ENGAGEMENT RATE BY FORMAT  
 format_engagement = (
-    df.groupby("format")["engagement_rate"]
+    filtered_df.groupby("format")["engagement_rate"]
     .mean()
     .sort_values(ascending=False)
 )
 
 st.bar_chart(format_engagement)
 
-platform_filter = st.sidebar.selectbox(
-    "Platform",
-    ["All"] + list(df["platform"].unique())
-)
-
 # Side Bar Filters
 
 platform_filter = st.sidebar.selectbox(
     "Platform",
-    ["All"] + list(df["platform"].unique())
+    ["All"] + list(df["platform"].unique()),
+    key="platform_filter"
 )
 
 topic_filter = st.sidebar.selectbox(
     "Topic",
-    ["All"] + list(df["topic"].unique())
+    ["All"] + list(df["topic"].unique()),
+    key="topic_filter"
 )
 
 format_filter = st.sidebar.selectbox(
     "Format",
-    ["All"] + list(df["format"].unique())
+    ["All"] + list(df["format"].unique()),
+    key="format_filter"
 )
 
 # Apply Filters
-
-filtered_df = df.copy()
 
 if platform_filter != "All":
     filtered_df = filtered_df[
