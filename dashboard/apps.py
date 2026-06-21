@@ -9,20 +9,24 @@ st.title("AttentionLab")
 st.subheader("Creator Intelligence Dashboard")
 
 # Load Data
-df = pd.read_csv("data/Dummy Data.csv")
+df = pd.read_csv("data/cleaned_attentionlab_data.csv")
 
 
 # KPI CALCULATIONS
 
-total_views = df["Views"].sum()
+total_views = df["views"].sum()
+
 total_videos = len(df)
+total_views = df["views"].sum()
+avg_engagement = df["engagement_rate"].mean()
+total_followers = df["followers_gained"].sum()
 
 engagement_rate = (
     (
-        df["Likes"]
-        + df["Comments"]
-        + df["Shares"]
-        + df["Saves"]
+        df["likes"]
+        + df["comments"]
+        + df["shares"]
+        + df["saves"]
     ).sum()
     / total_views
 ) * 100
@@ -30,54 +34,77 @@ engagement_rate = (
 
 # KPI CARDS
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Total Views", f"{total_views:,}")
-col2.metric("Total Videos", total_videos)
-col3.metric("Avg Engagement", f"{engagement_rate:.2f}%")
+col1.metric("Videos", total_videos)
 
-st.divider()
+col2.metric("Views", f"{total_views:,}")
 
+col3.metric(
+    "Avg Engagement",
+    f"{avg_engagement:.2%}"
+)
 
-# VIEWS BY HOOK TYPE
+col4.metric(
+    "Followers Gained",
+    f"{total_followers:,}"
+)
 
+# Charts and Visualizations
 
-hook_views = (
-    df.groupby("Hook_Type")["Views"]
+# VIEWS BY TOPIC 
+topic_views = (
+    df.groupby("topic")["views"]
     .mean()
-    .idxmax()
+    .sort_values(ascending=False)
 )
 
-st.metric("Most Effective Hook Type", hook_views)
+st.bar_chart(topic_views)
 
-fig1 = px.bar(
-    hook_views,
-    x="Hook_Type",
-    y="Views",
-    title="Average Views by Hook Type"
-)
-
-st.plotly_chart(fig1, use_container_width=True)
-
-# VIEWS BY CATEGORY
-
-category_views = (
-    df.groupby("Category")["Views"]
+# VIEWS BY PLATFORM
+platform_views = (
+    df.groupby("platform")["views"]
     .mean()
-    .idxmax()
+    .sort_values(ascending=False)
 )
 
-fig2 = px.bar(
-    category_views,
-    x="Category",
-    y="Views",
-    title="Average Views by Category"
+st.bar_chart(platform_views)
+
+# ENGAGEMENT RATE BY FORMAT  
+format_engagement = (
+    df.groupby("format")["engagement_rate"]
+    .mean()
+    .sort_values(ascending=False)
 )
 
-st.plotly_chart(fig2, use_container_width=True)
+st.bar_chart(format_engagement)
 
-st.subheader("Key Insights")
-st.write(
-    "1. The most effective hook type is: **{hook_views}**.\n"
-    "2. The most engaging category is: **{category_views}**.")
+platform_filter = st.sidebar.selectbox(
+    "Platform",
+    ["All"] + list(df["platform"].unique())
+)
+
+# Filter Data Based on Platform Selection
+
+filtered_df = df.copy()
+
+if platform_filter != "All":
+    filtered_df = filtered_df[
+        filtered_df["platform"] == platform_filter
+    ]
+
+
+# KEY FINDINGS
+
+st.header("Key Findings")
+
+st.write("""
+• AI content generated the highest average views.
+
+• Tutorial videos had stronger engagement.
+
+• Short-form content between 15–30 seconds performed best.
+
+• TikTok generated the highest average reach.
+""")
 

@@ -76,3 +76,25 @@ Day 3:
         - Push
 
 Day 4:
+    - SQL file (DONE)
+        - Created/updated sql/analyst_queries.sql
+        - Added top video query
+        - Added platform query
+        - Added topic query
+        - Added format query
+        - Added hook query
+        - Added length bucket query
+        - Added posting day query
+        - Added ROI query
+    - Notebook
+        - Opened database connection
+        - Confirmed videos table exists
+        - Ran each SQL query with pd.read_sql()
+        - Checked that outputs make sense
+    - Findings
+        - Created docs/day4_sql_findings.md
+        - Wrote 5–7 business insights
+        - Wrote 1 recommendation
+    - GitHub
+        - git add .
+        - git commit and push
