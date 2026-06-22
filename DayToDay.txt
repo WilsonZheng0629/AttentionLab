@@ -121,4 +121,19 @@ Day 6:
         - Top Videos
     - Save Screenshoot of the Dashboard in Images
 
-
+Day 7: 
+    - Posting Analysis
+        - Views by day of week
+        - Weekend vs weekday
+    - Length Analysis
+        - Views by length
+        - Engagement by length
+    - ROI Analysis
+        - Views per minute by topic
+        - Top ROI videos table
+    - Dashboard
+        - Updated recommendations section
+    - GitHub
+        - git add .
+        - git commit -m "Add posting pattern and ROI analysis"
+        - git push

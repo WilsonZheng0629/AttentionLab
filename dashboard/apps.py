@@ -209,7 +209,106 @@ st.dataframe(
     ]
 )
 
+# Posting Pattern Analysis
+st.header("Posting Pattern Analysis")
 
+day_views = (
+    filtered_df
+    .groupby("day_of_week")["views"]
+    .mean()
+    .reindex(
+        [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ]
+    )
+)
+
+st.header("Average Views by Day of Week")
+st.bar_chart(day_views)
+
+weekend_views = (
+    filtered_df
+    .groupby("is_weekend")["views"]
+    .mean()
+)
+
+st.header("Average Views: Weekday vs Weekend")
+st.bar_chart(weekend_views)
+
+
+st.header("Video Length Analysis")
+length_views = (
+    filtered_df
+    .groupby("length_bucket")["views"]
+    .mean()
+)
+
+st.header("Average Views by Video Length")
+st.bar_chart(length_views)
+
+
+length_engagement = (
+    filtered_df
+    .groupby("length_bucket")["engagement_rate"]
+    .mean()
+)
+
+st.header("Average Engagement by Video Length")
+st.bar_chart(length_engagement)
+
+st.header("ROI Analysis")
+topic_roi = (
+    filtered_df
+    .groupby("topic")["roi_score"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+st.subheader("Average ROI Score by Topic")
+st.bar_chart(topic_roi)
+
+video_roi = (
+    filtered_df
+    .sort_values(
+        by="roi_score",
+        ascending=False
+    )
+    .head(10)
+)
+
+st.dataframe(
+    video_roi[
+        [
+            "caption",
+            "views",
+            "topic",
+            "editing_time_minutes",
+            "views_per_minute",
+        ]
+    ]
+)
+
+# Business Recommendations
+
+st.header("Business Recommendations")
+
+st.success("""
+1. AI content generates the highest average reach.
+
+2. Tutorial formats consistently outperform storytelling formats.
+
+3. Videos between 15–30 seconds have the strongest engagement.
+
+4. Weekend posting appears to improve average views.
+
+5. High-performing videos typically require less editing time than expected.
+""")
 
 
 # KEY INSIGHTS
