@@ -137,3 +137,25 @@ Day 7:
         - git add .
         - git commit -m "Add posting pattern and ROI analysis"
         - git push
+
+Day 8:
+    - Dashboard Design
+        - Add dividers
+        - Add section headers
+        - Add chart titles
+        - Add chart descriptions
+    - Formatting
+        - Clean KPI formatting
+        - Clean engagement formatting
+        - Clean table formatting
+    - Documentation
+        - Dashboard description
+        - About section
+    - Assets
+        - Screenshot homepage
+        - Screenshot KPI section
+        - Screenshot filters
+        - Screenshot ROI section
+    - GitHub
+        - Commit
+        - Push
