@@ -86,20 +86,20 @@ Day 4:
         - Added length bucket query
         - Added posting day query
         - Added ROI query
-    - Notebook
+    - Notebook (DONE)
         - Opened database connection
         - Confirmed videos table exists
         - Ran each SQL query with pd.read_sql()
         - Checked that outputs make sense
-    - Findings
+    - Findings (DONE)
         - Created docs/day4_sql_findings.md
         - Wrote 5–7 business insights
         - Wrote 1 recommendation
-    - GitHub
+    - GitHub (DONE)
         - git add .
         - git commit and push
 
-Day 5:
+Day 5: (DONE)
     - Dashboard homepage
     - KPI cards
     - Topic chart
@@ -109,53 +109,70 @@ Day 5:
     - Save screenshot in images 
 
 Day 6: 
-    - Filters
+    - Filters (DONE)
         - Sidebar
-    - Charts
+    - Charts (DONE)
         - Topic Views
         - Topic Engagement
         - Format Views
         - Format Engagement
         - Hook Analysis
-    - Table
+    - Table (DONE)
         - Top Videos
     - Save Screenshoot of the Dashboard in Images
 
 Day 7: 
-    - Posting Analysis
+    - Posting Analysis (DONE)
         - Views by day of week
         - Weekend vs weekday
-    - Length Analysis
+    - Length Analysis (DONE)
         - Views by length
         - Engagement by length
-    - ROI Analysis
+    - ROI Analysis (DONE)
         - Views per minute by topic
         - Top ROI videos table
-    - Dashboard
+    - Dashboard (DONE)
         - Updated recommendations section
-    - GitHub
+    - GitHub (DONE)
         - git add .
         - git commit -m "Add posting pattern and ROI analysis"
         - git push
 
 Day 8:
-    - Dashboard Design
+    - Dashboard Design (DONE)
         - Add dividers
         - Add section headers
         - Add chart titles
         - Add chart descriptions
-    - Formatting
+    - Formatting (DONE)
         - Clean KPI formatting
         - Clean engagement formatting
         - Clean table formatting
-    - Documentation
+    - Documentation (DONE)
         - Dashboard description
         - About section
-    - Assets
+    - Assets (DONE)
         - Screenshot homepage
         - Screenshot KPI section
         - Screenshot filters
         - Screenshot ROI section
-    - GitHub
+    - GitHub (DONE)
         - Commit
         - Push
+
+Day 9: 
+    - Recommendation Engine (DONE)
+        - Best Topic
+        - Best Format
+        - Best Hook
+        - Best Day
+        - Best Length
+        - Best ROI Topic
+    - Display (DONE)
+        - Success box
+        - Executive summary
+        - Recommendation table
+    - Assets (DONE)
+        - Screenshot recommendation section
+
+Day 10: 

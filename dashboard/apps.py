@@ -278,6 +278,103 @@ st.success("""
 
 st.divider()
 
+# Ai strategy recommendations
+st.header("Content Strategy Recommendations")
+
+best_topic = (
+    filtered_df
+    .groupby("topic")["views"]
+    .mean()
+    .idxmax()
+)
+
+best_format = (
+    filtered_df
+    .groupby("format")["engagement_rate"]
+    .mean()
+    .idxmax()
+)
+
+best_hook = (
+    filtered_df
+    .groupby("hook_type")["views"]
+    .mean()
+    .idxmax()
+)
+
+best_day = (
+    filtered_df
+    .groupby("day_of_week")["views"]
+    .mean()
+    .idxmax()
+)
+
+best_length = (
+    filtered_df
+    .groupby("length_bucket")["views"]
+    .mean()
+    .idxmax()
+)
+
+best_roi_topic = (
+    filtered_df
+    .groupby("topic")["views_per_minute"]
+    .mean()
+    .idxmax()
+)
+
+st.success(
+    f"""
+    Best Topic: {best_topic}
+
+    Best Format: {best_format}
+
+    Best Hook Type: {best_hook}
+
+    Best Posting Day: {best_day}
+
+    Best Video Length: {best_length}
+
+    Best ROI Topic: {best_roi_topic}
+    """
+)
+
+st.info(
+    f"""
+    AttentionLab Recommendation:
+
+    Focus on {best_topic} content using
+    {best_format} formats and
+    {best_hook} hooks.
+
+    Publish primarily on {best_day}
+    and prioritize videos in the
+    {best_length} category.
+
+    The highest production ROI currently
+    comes from {best_roi_topic} content.
+    """
+)
+
+recommendations = pd.DataFrame({
+    "Category": [
+        "Topic",
+        "Format",
+        "Hook Type",
+        "Posting Day",
+        "Video Length",
+        "ROI"
+    ],
+    "Recommendation": [
+        best_topic,
+        best_format,
+        best_hook,
+        best_day,
+        best_length,
+        best_roi_topic
+    ]
+})
+
 # About section
 st.header("About This Dashboard")
 
