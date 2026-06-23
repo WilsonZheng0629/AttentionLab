@@ -195,7 +195,7 @@ st.divider()
 st.header("Production ROI Analysis")
 
 topic_roi = (
-    filtered_df.groupby("topic")["roi_score"]
+    filtered_df.groupby("topic")["views_per_minute"]
     .mean()
     .sort_values(ascending=False)
 )
@@ -206,7 +206,7 @@ st.caption("Shows which topics generate the strongest return relative to product
 
 video_roi = (
     filtered_df.sort_values(
-        by="roi_score",
+        by="views_per_minute",
         ascending=False
     )
     .head(10)
@@ -222,7 +222,7 @@ roi_table = video_roi[
         "views",
         "editing_time_minutes",
         "views_per_minute",
-        "roi_score"
+        "views_per_minute"
     ]
 ].copy()
 
