@@ -222,7 +222,6 @@ roi_table = video_roi[
         "views",
         "editing_time_minutes",
         "views_per_minute",
-        "views_per_minute"
     ]
 ].copy()
 
