@@ -176,3 +176,49 @@ Day 9:
         - Screenshot recommendation section
 
 Day 10: 
+    README
+        Project overview
+        Business problem
+        Features
+        Tech stack
+        Insights
+        Recommendations
+        Future improvements
+    Assets
+        Dashboard screenshot
+        Topic screenshot
+        ROI screenshot
+        Recommendation screenshot
+    Repo
+        requirements.txt
+        .gitignore
+        GitHub
+        Update repository description
+    Github
+        git add .
+        git commit -m "Add project documentation and GitHub polish"
+        git push
+
+Day 11:
+    Case Study
+        Project Overview
+        Business Problem
+        Goals
+        Tech Stack
+        Data Pipeline
+        Features
+        Insights
+        Recommendations
+        Lessons Learned
+    Assets
+        Dashboard screenshot
+        Topic screenshot
+        ROI screenshot
+        Recommendations screenshot
+    Interview Prep
+        30-second explanation
+        2-minute explanation
+    GitHub
+        git add .
+        git commit -m "Add AttentionLab case study"
+        git push
