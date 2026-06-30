@@ -96,7 +96,7 @@ col1, col2, col3, col4 = st.columns(4)
 
 col1.metric("Videos", total_videos)
 col2.metric("Views", f"{total_views:,}")
-col3.metric("Avg Engagement", f"{avg_engagement:.2%}")
+col3.metric("Average Engagement", f"{avg_engagement:.2%}")
 col4.metric("Followers Gained", f"{total_followers:,}")
 
 st.divider()
