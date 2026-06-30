@@ -1,4 +1,4 @@
-# AttentionLab | End-to-End Creator Analytics Platform
+# AttentionLab | Creator Analytics Platform
 
 ![AttentionLab Dashboard](images/dashboard_home.png)
 
