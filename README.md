@@ -1,155 +1,289 @@
-# AttentionLab
+# AttentionLab | End-to-End Creator Analytics Platform
 
-## Creator Intelligence Dashboard
+![AttentionLab Dashboard](images/dashboard_home.png)
 
-AttentionLab is a creator analytics platform built with Python, Pandas, SQLite, SQL, and Streamlit.
+AttentionLab is an end-to-end creator analytics platform that transforms short-form content performance data into actionable business recommendations.
 
-The platform analyzes short-form content performance across TikTok, Instagram Reels, and YouTube Shorts to identify which topics, formats, hooks, posting patterns, video lengths, and workflows generate the highest engagement and production ROI.
-
----
-
-## Business Problem
-
-Content creators often rely on intuition when deciding:
-
-* What content to create
-* Which hooks to use
-* How long videos should be
-* When to post
-* How much production effort is worthwhile
-
-AttentionLab transforms content performance data into actionable recommendations.
+Built with **Python, Pandas, SQL, SQLite, Plotly, and Streamlit**, the platform analyzes content across **TikTok, Instagram Reels, and YouTube Shorts** to identify which topics, formats, hooks, posting patterns, video lengths, and production workflows generate the strongest engagement and return on production effort.
 
 ---
 
-## Key Features
+# Business Problem
 
-### Data Engineering
+Content creators publish hundreds of videos every year, yet many decisions are still based on intuition rather than data.
 
-* Data cleaning with Pandas
-* Feature engineering
-* KPI creation
-* Engagement metrics
-* ROI metrics
+Questions such as:
 
-### SQL Analytics
+- Which topics consistently perform best?
+- Which hook styles maximize engagement?
+- Does posting day affect performance?
+- What video length generates the strongest ROI?
+- How much editing effort is actually worthwhile?
 
-* SQLite database
-* SQL aggregation queries
-* Topic analysis
-* Format analysis
-* Hook analysis
-* Posting pattern analysis
+are difficult to answer without structured analytics.
 
-### Interactive Dashboard
-
-* Executive summary KPIs
-* Platform filters
-* Topic filters
-* Format filters
-* Content performance analysis
-* ROI analysis
-* Strategy recommendations
+AttentionLab helps answer these questions through an end-to-end analytics workflow that transforms raw performance data into business recommendations.
 
 ---
 
-## Tech Stack
+# Business Impact
 
-* Python
-* Pandas
-* SQLite
-* SQL
-* Streamlit
-* Plotly
+AttentionLab enables creators to make data-driven content decisions instead of relying on guesswork.
 
----
+The platform helps identify:
 
-## Dashboard Screenshots
+- High-performing content categories
+- Strongest engagement drivers
+- Best posting windows
+- Most efficient production workflows
+- Highest ROI content opportunities
 
-### Executive Summary
-
-[Insert screenshot here]
-
-### Topic Analysis
-
-[Insert screenshot here]
-
-### ROI Analysis
-
-[Insert screenshot here]
-
-### Recommendations
-
-[Insert screenshot here]
+Rather than simply displaying charts, the dashboard converts creator performance data into actionable recommendations that can improve future content strategy.
 
 ---
 
-## Key Insights
+# Dashboard Preview
 
-* AI-related content generated the highest average reach.
-* Tutorial formats produced stronger engagement rates.
-* Short-form videos between 15–30 seconds performed best.
-* Weekend posting improved average views.
-* High-performing videos frequently required less editing effort than expected.
+### Executive Dashboard
+
+![Executive Dashboard](images/dashboard_home.png)
+
+### Topic Performance Analysis
+
+![Topic Analysis](images/topic_analysis.png)
+
+### Production ROI Analysis
+
+![ROI Analysis](images/roi_analysis.png)
+
+### Trend Analysis
+
+![Trend Analysis](images/trend_analysis.png)
+
+### AI Content Strategist
+
+![AI Recommendations](images/ai_strategist.png)
 
 ---
 
-## Business Recommendations
+# Core Features
 
-* Increase production of high-performing topics.
-* Prioritize formats with strong engagement.
-* Publish content during higher-performing posting windows.
-* Focus on content strategies that maximize views per minute worked.
-* Scale high-ROI content categories.
+## Executive Dashboard
+
+- Executive KPI summary
+- Total views
+- Average engagement rate
+- Followers gained
+- Interactive dashboard filters
+
+## Content Performance Analysis
+
+- Topic performance analysis
+- Format performance analysis
+- Hook performance analysis
+- Video length analysis
+- Top-performing content identification
+
+## Posting Pattern Analysis
+
+- Day-of-week performance
+- Weekday vs. weekend comparison
+- Posting trend analysis
+
+## Production ROI Analysis
+
+- Views per minute worked
+- Engagement per minute worked
+- High ROI content identification
+- Editing efficiency analysis
+
+## AI Content Strategist
+
+- Rule-based recommendation engine
+- Best-performing topics
+- Best-performing hooks
+- Best-performing formats
+- Best posting schedule
+- Highest ROI strategy recommendations
 
 ---
 
-## Project Structure
+# Data Pipeline
 
+```text
+Raw CSV Data
+        │
+        ▼
+Data Cleaning (Pandas)
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+SQLite Database
+        │
+        ▼
+SQL Analytics
+        │
+        ▼
+Interactive Streamlit Dashboard
+        │
+        ▼
+Business Recommendations
+```
+
+---
+
+# Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Programming | Python |
+| Data Processing | Pandas |
+| Database | SQLite |
+| Query Language | SQL |
+| Dashboard | Streamlit |
+| Visualization | Plotly |
+
+---
+
+# Skills Demonstrated
+
+## Data Engineering
+
+- Data cleaning
+- Feature engineering
+- KPI development
+- Metric calculation
+- Data transformation
+
+## Analytics
+
+- SQL querying
+- Trend analysis
+- ROI analysis
+- Business recommendation generation
+- KPI reporting
+
+## Dashboard Development
+
+- Interactive filtering
+- Executive reporting
+- Data visualization
+- Analytical storytelling
+
+---
+
+# Key Insights
+
+Analysis of the creator dataset revealed several actionable insights:
+
+- AI-related content generated the highest average reach.
+- Tutorial-style videos consistently produced stronger engagement.
+- Videos between **15–30 seconds** achieved the strongest overall performance.
+- Weekend publishing generated higher average views.
+- Higher production effort did not always result in better performance, highlighting opportunities to optimize editing time.
+
+---
+
+# Business Recommendations
+
+Based on the analysis, creators should:
+
+- Prioritize high-performing content categories.
+- Invest in tutorial-focused content formats.
+- Publish more frequently during higher-performing posting windows.
+- Optimize production workflows using ROI metrics.
+- Allocate editing effort toward content categories with the highest return.
+
+---
+
+# Future Improvements
+
+Potential future enhancements include:
+
+- Automated TikTok, Instagram, and YouTube API integration
+- Cloud deployment for public access
+- Machine learning models for performance prediction
+- A/B testing framework for content experiments
+- Automated executive reporting
+- Multi-user creator dashboards
+
+---
+
+# Project Structure
+
+```text
 AttentionLab/
-
-├── data/
-
+│
 ├── dashboard/
-
+│   └── apps.py
+│
+├── data/
+│   ├── raw_attentionlab_data.csv
+│   ├── cleaned_attentionlab_data.csv
+│   └── attentionlab.db
+│
 ├── notebooks/
-
+│   ├── data_cleaning.ipynb
+│   └── sql_analyst.ipynb
+│
 ├── sql/
-
+│   ├── create_database.py
+│   └── analyst_queries.sql
+│
+├── docs/
+│   └── case_study.md
+│
 ├── images/
-
+│
 └── README.md
+```
 
 ---
 
-## How To Run
+# Running the Project
 
-1. Clone repository
+Clone the repository:
 
-2. Install dependencies
+```bash
+git clone <repository-url>
+```
 
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-3. Launch dashboard
+Launch the dashboard:
 
+```bash
 streamlit run dashboard/apps.py
+```
 
 ---
 
-## Future Improvements
+# What I Learned
 
-* AI-generated content recommendations
-* Trend analysis dashboard
-* Experiment tracking
-* Advanced visualizations
-* Cloud deployment
+Through this project, I strengthened my ability to:
+
+- Design an end-to-end analytics workflow.
+- Engineer meaningful business KPIs from raw data.
+- Build relational databases using SQLite.
+- Analyze structured data with SQL.
+- Develop interactive dashboards using Streamlit and Plotly.
+- Translate analytical findings into actionable business recommendations.
+- Communicate technical insights to business stakeholders through data storytelling.
 
 ---
 
-## Author
+# Author
 
-Wilson Zheng
+**Wilson Zheng**
 
 University of Virginia
 
-Computer Science + Applied Statistics
+B.S. Computer Science & Applied Statistics
+
+Interested in Data Analytics, Business Analytics, Business Intelligence, and Product Analytics.
