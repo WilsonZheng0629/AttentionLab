@@ -7,14 +7,46 @@ st.set_page_config(page_title="AttentionLab", layout="wide")
 
 # Load data
 df = pd.read_csv("data/cleaned_attentionlab_data.csv")
+df["post_date"] = pd.to_datetime(df["post_date"])
+
+# Static chart config
+STATIC_CHART_CONFIG = {
+    "staticPlot": True,
+    "displayModeBar": False
+}
+
+# Helper function for static bar charts
+def static_bar_chart(data, x_col, y_col, title, x_label=None, y_label=None):
+    fig = px.bar(
+        data,
+        x=x_col,
+        y=y_col,
+        title=title,
+        labels={
+            x_col: x_label or x_col,
+            y_col: y_label or y_col
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title=x_label or x_col,
+        yaxis_title=y_label or y_col
+    )
+
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config=STATIC_CHART_CONFIG
+    )
 
 # Title
 st.title("AttentionLab")
 st.subheader("Creator Intelligence Dashboard")
 
 st.write("""
-AttentionLab analyzes short-form content performance across platforms,
-topics, formats, hooks, posting patterns, and production ROI.
+AttentionLab is an end-to-end analytics dashboard designed to evaluate short-form content performance across TikTok, Instagram Reels, and YouTube Shorts.
+
+The dashboard uses Python, Pandas, SQL, SQLite, and Streamlit to analyze content topics, formats, hooks, posting patterns, video length, engagement, follower growth, and production ROI. The goal is to turn raw creator performance data into clear business recommendations.
 """)
 
 st.divider()
@@ -76,20 +108,34 @@ topic_views = (
     filtered_df.groupby("topic")["views"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average Views by Topic")
-st.bar_chart(topic_views)
+static_bar_chart(
+    topic_views,
+    "topic",
+    "views",
+    "Average Views by Topic",
+    "Topic",
+    "Average Views"
+)
 st.caption("Shows which content topics generate the highest average reach.")
 
 topic_engagement = (
     filtered_df.groupby("topic")["engagement_rate"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average Engagement by Topic")
-st.bar_chart(topic_engagement)
+static_bar_chart(
+    topic_engagement,
+    "topic",
+    "engagement_rate",
+    "Average Engagement by Topic",
+    "Topic",
+    "Average Engagement Rate"
+)
 st.caption("Shows which topics generate the strongest engagement rate.")
 
 st.divider()
@@ -101,20 +147,34 @@ format_views = (
     filtered_df.groupby("format")["views"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average Views by Format")
-st.bar_chart(format_views)
+static_bar_chart(
+    format_views,
+    "format",
+    "views",
+    "Average Views by Format",
+    "Format",
+    "Average Views"
+)
 st.caption("Compares how different content formats perform by average views.")
 
 format_engagement = (
     filtered_df.groupby("format")["engagement_rate"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average Engagement by Format")
-st.bar_chart(format_engagement)
+static_bar_chart(
+    format_engagement,
+    "format",
+    "engagement_rate",
+    "Average Engagement by Format",
+    "Format",
+    "Average Engagement Rate"
+)
 st.caption("Compares how different formats perform by engagement rate.")
 
 st.divider()
@@ -126,10 +186,17 @@ hook_views = (
     filtered_df.groupby("hook_type")["views"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average Views by Hook Type")
-st.bar_chart(hook_views)
+static_bar_chart(
+    hook_views,
+    "hook_type",
+    "views",
+    "Average Views by Hook Type",
+    "Hook Type",
+    "Average Views"
+)
 st.caption("Shows which opening hook styles generate the most average views.")
 
 st.divider()
@@ -151,19 +218,40 @@ day_views = (
     filtered_df.groupby("day_of_week")["views"]
     .mean()
     .reindex(day_order)
+    .reset_index()
 )
 
-st.subheader("Average Views by Day of Week")
-st.bar_chart(day_views)
+day_views.columns = ["day_of_week", "views"]
+
+static_bar_chart(
+    day_views,
+    "day_of_week",
+    "views",
+    "Average Views by Day of Week",
+    "Day of Week",
+    "Average Views"
+)
 st.caption("Shows whether posting day is associated with stronger reach.")
 
 weekend_views = (
     filtered_df.groupby("is_weekend")["views"]
     .mean()
+    .reset_index()
 )
 
-st.subheader("Average Views: Weekday vs Weekend")
-st.bar_chart(weekend_views)
+weekend_views["is_weekend"] = weekend_views["is_weekend"].map({
+    True: "Weekend",
+    False: "Weekday"
+})
+
+static_bar_chart(
+    weekend_views,
+    "is_weekend",
+    "views",
+    "Average Views: Weekday vs Weekend",
+    "Post Type",
+    "Average Views"
+)
 st.caption("Compares average performance between weekday and weekend posts.")
 
 st.divider()
@@ -174,34 +262,55 @@ st.header("Video Length Analysis")
 length_views = (
     filtered_df.groupby("length_bucket")["views"]
     .mean()
+    .reset_index()
 )
 
-st.subheader("Average Views by Video Length")
-st.bar_chart(length_views)
+static_bar_chart(
+    length_views,
+    "length_bucket",
+    "views",
+    "Average Views by Video Length",
+    "Length Bucket",
+    "Average Views"
+)
 st.caption("Shows which video length ranges generate the highest average views.")
 
 length_engagement = (
     filtered_df.groupby("length_bucket")["engagement_rate"]
     .mean()
+    .reset_index()
 )
 
-st.subheader("Average Engagement by Video Length")
-st.bar_chart(length_engagement)
+static_bar_chart(
+    length_engagement,
+    "length_bucket",
+    "engagement_rate",
+    "Average Engagement by Video Length",
+    "Length Bucket",
+    "Average Engagement Rate"
+)
 st.caption("Shows which video length ranges generate stronger engagement.")
 
 st.divider()
 
-# ROI Analysis
+# Production ROI Analysis
 st.header("Production ROI Analysis")
 
 topic_roi = (
     filtered_df.groupby("topic")["views_per_minute"]
     .mean()
     .sort_values(ascending=False)
+    .reset_index()
 )
 
-st.subheader("Average ROI Score by Topic")
-st.bar_chart(topic_roi)
+static_bar_chart(
+    topic_roi,
+    "topic",
+    "views_per_minute",
+    "Average Views Per Minute Worked by Topic",
+    "Topic",
+    "Views Per Minute Worked"
+)
 st.caption("Shows which topics generate the strongest return relative to production effort.")
 
 video_roi = (
@@ -221,11 +330,94 @@ roi_table = video_roi[
         "topic",
         "views",
         "editing_time_minutes",
-        "views_per_minute",
+        "views_per_minute"
     ]
 ].copy()
 
 st.dataframe(roi_table)
+
+st.divider()
+
+# Trend Analysis
+st.header("Trend Analysis")
+
+views_trend = (
+    filtered_df.groupby("post_date")["views"]
+    .sum()
+    .reset_index()
+)
+
+fig_views = px.line(
+    views_trend,
+    x="post_date",
+    y="views",
+    title="Views Over Time",
+    labels={
+        "post_date": "Post Date",
+        "views": "Total Views"
+    }
+)
+
+st.plotly_chart(
+    fig_views,
+    use_container_width=True,
+    config=STATIC_CHART_CONFIG
+)
+
+st.caption("Shows how total views changed over time based on posting date.")
+
+engagement_trend = (
+    filtered_df.groupby("post_date")["engagement_rate"]
+    .mean()
+    .reset_index()
+)
+
+fig_engagement = px.line(
+    engagement_trend,
+    x="post_date",
+    y="engagement_rate",
+    title="Average Engagement Rate Over Time",
+    labels={
+        "post_date": "Post Date",
+        "engagement_rate": "Average Engagement Rate"
+    }
+)
+
+st.plotly_chart(
+    fig_engagement,
+    use_container_width=True,
+    config=STATIC_CHART_CONFIG
+)
+
+st.caption("Shows whether engagement performance is improving or declining over time.")
+
+followers_trend = (
+    filtered_df.groupby("post_date")["followers_gained"]
+    .sum()
+    .cumsum()
+    .reset_index()
+)
+
+followers_trend.columns = ["post_date", "cumulative_followers_gained"]
+
+fig_followers = px.line(
+    followers_trend,
+    x="post_date",
+    y="cumulative_followers_gained",
+    title="Cumulative Followers Gained Over Time",
+    labels={
+        "post_date": "Post Date",
+        "cumulative_followers_gained": "Cumulative Followers Gained"
+    }
+)
+
+st.plotly_chart(
+    fig_followers,
+    use_container_width=True,
+    config=STATIC_CHART_CONFIG
+)
+
+st.caption("Shows follower growth accumulated over time.")
 
 st.divider()
 
@@ -256,29 +448,11 @@ top_video_table["engagement_rate"] = (
 ).round(2)
 
 st.dataframe(top_video_table)
-
 st.caption("Engagement rate is shown as a percentage.")
 
 st.divider()
 
-# Business Recommendations
-st.header("Business Recommendations")
-
-st.success("""
-1. Prioritize topics and formats with high average views and strong engagement.
-
-2. Use posting pattern analysis to identify better publishing windows.
-
-3. Focus on video lengths that produce both strong reach and engagement.
-
-4. Use ROI analysis to avoid over-investing time into low-return content.
-
-5. Scale content types that generate strong views per minute of editing effort.
-""")
-
-st.divider()
-
-# Ai strategy recommendations
+# Content Strategy Recommendations
 st.header("Content Strategy Recommendations")
 
 best_topic = (
@@ -343,16 +517,11 @@ st.info(
     f"""
     AttentionLab Recommendation:
 
-    Focus on {best_topic} content using
-    {best_format} formats and
-    {best_hook} hooks.
+    Focus on {best_topic} content using {best_format} formats and {best_hook} hooks.
 
-    Publish primarily on {best_day}
-    and prioritize videos in the
-    {best_length} category.
+    Publish primarily on {best_day} and prioritize videos in the {best_length} category.
 
-    The highest production ROI currently
-    comes from {best_roi_topic} content.
+    The highest production ROI currently comes from {best_roi_topic} content.
     """
 )
 
@@ -375,12 +544,97 @@ recommendations = pd.DataFrame({
     ]
 })
 
+st.dataframe(recommendations)
+
+st.divider()
+
+# AI Content Strategist
+st.header("AI Content Strategist")
+
+st.info(f"""
+Recommended Strategy:
+
+Create more **{best_topic}** content using **{best_format}** formats and **{best_hook}** hooks.
+
+Prioritize videos in the **{best_length}** range because they currently generate the strongest average reach.
+
+From a production-efficiency perspective, **{best_roi_topic}** content produces the strongest return based on views per minute of editing time.
+
+This recommendation is generated using rule-based analytics across reach, engagement, posting patterns, and production ROI.
+""")
+
+st.divider()
+
+# Content Experiment Tracker
+st.header("Content Experiment Tracker")
+
+weekend_winner = (
+    "Weekend"
+    if filtered_df.groupby("is_weekend")["views"].mean().idxmax()
+    else "Weekday"
+)
+
+experiments = pd.DataFrame({
+    "Experiment": [
+        "Best Topic Test",
+        "Best Format Test",
+        "Best Hook Test",
+        "Short vs Long Videos",
+        "Weekend vs Weekday Posting"
+    ],
+    "Winning Segment": [
+        best_topic,
+        best_format,
+        best_hook,
+        best_length,
+        weekend_winner
+    ],
+    "Primary Metric": [
+        "Average Views",
+        "Engagement Rate",
+        "Average Views",
+        "Average Views",
+        "Average Views"
+    ],
+    "Recommendation": [
+        "Scale the strongest topic",
+        "Prioritize the highest-engagement format",
+        "Use the highest-performing hook style",
+        "Focus on the winning length bucket",
+        "Post more during the stronger window"
+    ]
+})
+
+st.dataframe(experiments)
+
+st.caption("This section frames dashboard findings as testable content strategy experiments.")
+
+st.divider()
+
+# Business Recommendations
+st.header("Business Recommendations")
+
+st.success("""
+1. Prioritize topics and formats with high average views and strong engagement.
+
+2. Use posting pattern analysis to identify better publishing windows.
+
+3. Focus on video lengths that produce both strong reach and engagement.
+
+4. Use ROI analysis to avoid over-investing time into low-return content.
+
+5. Scale content types that generate strong views per minute of editing effort.
+""")
+
+st.divider()
+
 # About section
 st.header("About This Dashboard")
 
 st.write("""
-Built with Python, Pandas, SQLite, SQL, and Streamlit.
+This project demonstrates a complete analytics workflow: data cleaning, feature engineering, SQL analysis, dashboard development, KPI reporting, and recommendation generation.
 
-This dashboard helps creators identify which content strategies generate
-the highest reach, engagement, follower growth, and production ROI.
+AttentionLab was built to answer a practical business question: which content strategies produce the strongest engagement and return on production effort?
+
+The dashboard is designed for analyst-style decision making, showing not only what performed well, but also what actions should be taken next.
 """)
